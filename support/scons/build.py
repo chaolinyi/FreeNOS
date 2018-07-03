@@ -52,16 +52,16 @@ def UseServers(env, servers = []):
 
 def HostProgram(env, target, source):
     if env['ARCH'] == 'host':
-	env.Program(target, source)
+        env.Program(target, source)
 
 def TargetProgram(env, target, source, install_dir = None):
     if env['ARCH'] != 'host':
-	env.Program(target, source)
-	env.TargetInstall(target, install_dir)
+        env.Program(target, source)
+        env.TargetInstall(target, install_dir)
 
 def TargetLibrary(env, lib, source):
     if env['ARCH'] != 'host':
-	env.Library(lib, source)
+        env.Library(lib, source)
 
 def CopyStrFunc(target, source, env):
     return "  " + env.subst_target_source("COPY $SOURCE => $TARGET", 0, target, source)
@@ -71,30 +71,30 @@ def DirStrFunc(target):
 
 def TargetInstall(env, source, target = None):
     if env['ARCH'] != 'host':
-	SCons.Tool.install.install_action.strfunction = CopyStrFunc
+        SCons.Tool.install.install_action.strfunction = CopyStrFunc
 
-	if not target:
-	    target = '${ROOTFS}/' + Dir('.').srcnode().path
+        if not target:
+            target = '${ROOTFS}/' + Dir('.').srcnode().path
 
-	env.Install(target, source)
-	rootfs_files.append(str(target) + os.sep + os.path.basename(source))
+        env.Install(target, source)
+        rootfs_files.append(str(target) + os.sep + os.path.basename(source))
 
 def SubDirectories():
     dir_list = []
     dir_src  = Dir('.').srcnode().abspath
 
     if dir_src:
-	for f in os.listdir(dir_src):
-	    if os.path.isdir(dir_src + os.sep + f):
-		dir_list.append(f)
+        for f in os.listdir(dir_src):
+            if os.path.isdir(dir_src + os.sep + f):
+                dir_list.append(f)
 
-	SConscript( dirs = dir_list )
+        SConscript( dirs = dir_list )
 
 Export('SubDirectories')
 
 # Create target, host and kernel environments.
 host = Environment(tools    = ["default", "phony", "test"],
-		   toolpath = ["support/scons"])
+                   toolpath = ["support/scons"])
 host.AddMethod(HostProgram, "HostProgram")
 host.AddMethod(TargetProgram, "TargetProgram")
 host.AddMethod(TargetLibrary, "TargetLibrary")
@@ -104,8 +104,8 @@ host.AddMethod(TargetInstall, "TargetInstall")
 host.Append(ROOTFS = '#${BUILDROOT}/rootfs')
 host.Append(ROOTFS_FILES = [])
 host.Append(bin     = '${ROOTFS}/bin',
-	    etc     = '${ROOTFS}/etc',
-	    server  = '${ROOTFS}/server',
+            etc     = '${ROOTFS}/etc',
+            server  = '${ROOTFS}/server',
             boot    = '${ROOTFS}/boot')
 
 target = host.Clone(tools    = ["default", "bootimage", "iso", "binary", "linn", "phony", "test"],

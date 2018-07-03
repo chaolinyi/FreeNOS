@@ -25,7 +25,7 @@ import os.path
 
 def timeoutChecker(proc, timeout):
     time.sleep(timeout)
-    print "Timeout occured (" + str(timeout) + " sec) -- aborting"
+    print ("Timeout occured (" + str(timeout) + " sec) -- aborting")
     proc.terminate()
     sys.exit(1)
 
@@ -83,7 +83,7 @@ def runTester(target, source, env):
 
         line = line.strip()
 
-        print line
+        print (line)
 
         if line.startswith('# Finish') and line.endswith('/test/run'):
             proc.terminate()
@@ -99,7 +99,7 @@ def runTester(target, source, env):
         else:
             tap += line + "\n"
 
-    print "Unexpected end of test output"
+    print ("Unexpected end of test output")
     proc.terminate()
     ch.terminate()
     sys.exit(1)

@@ -32,12 +32,12 @@ def Checksum(target, source, env):
 
     # Process checksum request.
     if   ext == ".md5":
-	print "  MD5 %s" % target
-	sum = hashlib.md5(content).hexdigest()
+        print( "  MD5 %s" % target)
+        sum = hashlib.md5(content).hexdigest()
 
     elif ext == ".sha1":
-	print "  SHA %s" % target
-	sum = hashlib.sha1(content).hexdigest()
+        print( "  SHA %s" % target)
+        sum = hashlib.sha1(content).hexdigest()
 
     # Write to output file.
     out = open(target, "w")

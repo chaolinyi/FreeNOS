@@ -54,7 +54,7 @@ def Files (path, include = ['*'],  exclude= []):
 #
 def Archive (target, source, env):
 
-    print '  TAR %s' % target
+    print( '  TAR %s' % target)
 
     path = os.path.basename (target)
     type = os.path.splitext (path)[-1]
@@ -70,7 +70,7 @@ def Archive (target, source, env):
         archive.add = archive.write
         path    = path.split('.zip')[0]
     else:
-        print "Unknown archive type (%s)" % type
+        print ("Unknown archive type (%s)" % type)
         return
 
     src = [str(s) for s in source if str(s) != path]
@@ -85,20 +85,20 @@ def ReleaseAction(target, source, env):
 
     inc_list = ['*']
     exl_list = ['*~', '.*', '*.o', '*.pyc', '*.tar.gz',
-		'*.tar.bz2', '*.zip', 'build']
+                '*.tar.bz2', '*.zip', 'build']
 
     Archive ('FreeNOS-' + build.target['VERSION'] + '.tar.gz',
-	      Files ('.', include = inc_list, exclude = exl_list), env)
+              Files ('.', include = inc_list, exclude = exl_list), env)
     Archive ('FreeNOS-' + build.target['VERSION'] + '.tar.bz2',
-	      Files ('.', include = inc_list, exclude = exl_list), env)
+              Files ('.', include = inc_list, exclude = exl_list), env)
     Checksum('FreeNOS-' + build.target['VERSION'] + '.tar.gz.md5',
-	     'FreeNOS-' + build.target['VERSION'] + '.tar.gz', env)
+             'FreeNOS-' + build.target['VERSION'] + '.tar.gz', env)
     Checksum('FreeNOS-' + build.target['VERSION'] + '.tar.gz.sha1',
-	     'FreeNOS-' + build.target['VERSION'] + '.tar.gz', env)
+             'FreeNOS-' + build.target['VERSION'] + '.tar.gz', env)
     Checksum('FreeNOS-' + build.target['VERSION'] + '.tar.bz2.md5',
-	     'FreeNOS-' + build.target['VERSION'] + '.tar.bz2', env)
+             'FreeNOS-' + build.target['VERSION'] + '.tar.bz2', env)
     Checksum('FreeNOS-' + build.target['VERSION'] + '.tar.bz2.sha1',
-	     'FreeNOS-' + build.target['VERSION'] + '.tar.bz2', env)
+             'FreeNOS-' + build.target['VERSION'] + '.tar.bz2', env)
 
 #phony.Targets(release = SCons.Action.Action(ReleaseAction, None))
 
