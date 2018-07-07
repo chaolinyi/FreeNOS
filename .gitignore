@@ -8,3 +8,5 @@ config.log
 /kernel/System
 .gdbinit
 /build*.conf
+html/
+si/

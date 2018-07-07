@@ -1,0 +1,2 @@
+Compare with Raspi 1 & 2, Raspi 3B ARM Processor has been upgraded to ARMv7 arch (Cortex-A) core.
+I can add the support this type.
