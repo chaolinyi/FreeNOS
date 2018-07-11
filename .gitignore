@@ -10,3 +10,4 @@ config.log
 /build*.conf
 html/
 si/
+siall/
