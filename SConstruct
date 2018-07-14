@@ -28,6 +28,9 @@ from archive import *
 build_env = target
 Export('build_env')
 
+# Modify Environment Parameters
+build_env.Append(CCFLAGS='-m32 -Wno-cpp -Wno-unused-variable -Wno-sign-compare')
+
 # Build programs, libraries and servers.
 VariantDir(target['BUILDROOT'] + '/lib', '#lib', duplicate = 0)
 VariantDir(target['BUILDROOT'] + '/bin', '#bin', duplicate = 0)
@@ -53,6 +56,9 @@ SConscript(target['BUILDROOT'] + '/kernel/' + target['ARCH'] + '/' + target['SYS
 #
 build_env = host
 Export('build_env')
+
+# Modify Environment Parameters
+#build_env.Append(CCFLAGS='-m32 -Wno-cpp -Wno-unused-variable -Wno-sign-compare')
 
 # Build programs and libraries.
 VariantDir(host['BUILDROOT'] + '/lib', '#lib', duplicate = 0)
